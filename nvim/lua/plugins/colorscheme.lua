@@ -1,68 +1,120 @@
+local mycolor = "kanagawa"
+
+local colorschemes = {
+
+    onedark = {
+        path = "navarasu/onedark.nvim",
+        config = function()
+            require("onedark").setup({style="darker"})
+            vim.cmd.colorscheme "onedark"
+        end,
+    },
+
+    kanagawa = {
+        path = "rebelot/kanagawa.nvim",
+        config = function()
+            vim.cmd.colorscheme "kanagawa"
+        end,
+    },
+
+    catppuccin_default = {
+        path = "catppuccin/nvim",
+        config = function()
+            vim.cmd.colorscheme "catppuccin"
+        end,
+    },
+
+    catppuccin2 = {
+        path = "catppuccin/nvim",
+        config = function()
+            require("catppuccin").setup({
+                term_colors=true,
+                color_overrides = {
+                    all = {
+                        base = "#000000",
+                        mantle = "#000000",
+                        crust = "#000000",
+                    },
+                },
+                highlight_overrides = {
+                    all = function(colors)
+                        return {
+                            StatusLine = {bg = "#1c1c1c"},
+                            VertSplit = {bg = "#1c1c1c"},
+                            CursorLine = {bg = "#121212"}
+                        }
+                    end,
+                },
+            })
+            vim.cmd.colorscheme "catppuccin"
+        end,
+    },
+
+    tokyonight = {
+        path = "folke/tokyonight.nvim",
+        config = function()
+            require("tokyonight").setup({style="night"})
+            vim.cmd.colorscheme "tokyonight"
+        end,
+    },
+
+    gruvbox = {
+        path = "ellisonleao/gruvbox.nvim",
+        config = function()
+            require("gruvbox").setup({contrast="hard"})
+            vim.cmd.colorscheme "gruvbox"
+        end,
+    },
+
+    gruvbox_morhetz = {
+        path = "morhetz/gruvbox",
+        config = function()
+            vim.cmd.colorscheme "gruvbox"
+        end,
+    },
+
+    oxocarbon = {
+        path = "nyoom-engineering/oxocarbon.nvim",
+        config = function()
+            vim.cmd.colorscheme "oxocarbon"
+        end,
+    },
+
+    material = {
+        path = "marko-cerovac/material.nvim",
+        config = function()
+            vim.g.material_style = "deep ocean"
+            require("material").setup({high_visibility = { darker = true }})
+            vim.cmd.colorscheme "material"
+        end,
+    },
+
+    vscode = {
+        path = "Mofiqul/vscode.nvim",
+        config = function()
+            require("vscode").load()
+        end,
+    },
+
+    monokai = {
+        path = "tanvirtin/monokai.nvim",
+        config = function()
+            require("monokai").setup({high_visibility = { darker = true }})
+            vim.cmd.colorscheme "monokai"
+        end,
+    },
+
+}
+
+
 return {
-	--"navarasu/onedark.nvim",
-    --"rebelot/kanagawa.nvim",
-    --"folke/tokyonight.nvim",
-    --"ellisonleao/gruvbox.nvim",
-    --"morhetz/gruvbox",
-    "catppuccin/nvim",
-    --"nyoom-engineering/oxocarbon.nvim",
-    --"marko-cerovac/material.nvim",
-    --"Mofiqul/vscode.nvim",
-    --"tanvirtin/monokai.nvim",
-    --
-    --name = "onedark",
-    --name = "kanagawa",
-    --name = "tokyonight",
-    --name = "gruvbox",
-    name = "catppuccin",
-    --name = "oxocarbon",
-    --name = "material",
-    --name = "vscode",
-    --name = "monokai",
-    --
+    colorschemes[mycolor].path,
+    name = mycolor,
     lazy = false,
 	priority = 1000,
 	config = function()
         vim.cmd([[set termguicolors]])
         vim.cmd([[set cursorline]])
-        --require("kanagawa").setup({theme="dragon", background={dark="dragon"}})
-        --require("tokyonight").setup({style="night"})
-        --require("onedark").setup({style="darker"})
-        --require("gruvbox").setup({contrast="hard"})
-        --
-        require("catppuccin").setup({
-            term_colors=true,
-            color_overrides = {
-                all = {
-                    base = "#000000",
-                    mantle = "#000000",
-                    crust = "#000000",
-                },
-            },
-            highlight_overrides = {
-                all = function(colors)
-                    return {
-                        StatusLine = {bg = "#1c1c1c"},
-                        VertSplit = {bg = "#1c1c1c"},
-                        CursorLine = {bg = "#121212"}
-                    }
-                end,
-            },
-        })
-        
-        --vim.g.material_style = "deep ocean"
-        --require("material").setup({high_visibility = { darker = true }})
-        --require("monokai").setup({high_visibility = { darker = true }})
-        --
-        --vim.cmd.colorscheme "onedark"
-        --vim.cmd.colorscheme "kanagawa"
-        --vim.cmd.colorscheme "tokyonight"
-        --vim.cmd.colorscheme "gruvbox"
-        vim.cmd.colorscheme "catppuccin"
-        --vim.cmd.colorscheme "oxocarbon"
-        --vim.cmd.colorscheme "material"
-        --require("vscode").load()
-        --vim.cmd.colorscheme "monokai"
-
+        colorschemes[mycolor].config()
 	end,
 }
